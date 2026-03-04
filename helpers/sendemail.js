@@ -5,8 +5,7 @@ const prisma = require('../prisma/client');
 const path =require('path');
 const bcrypt = require('bcrypt');
 const smsfunction = require('../helpers/sms')
-
-const resend =require('./email');
+const getResend = require('../helpers/email')
 
 router.post('/passwordreset',async(req,res)=>{
     const {emailreset} =req.body;
@@ -30,6 +29,7 @@ router.post('/passwordreset',async(req,res)=>{
         }
 
     })
+    const resend = getResend();
 await resend.emails.send({
      from: 'onboarding@resend.dev', 
     to:emailreset,
