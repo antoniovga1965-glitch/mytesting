@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port =3000;
+const PORT = process.env.PORT || 3000
 const cookieparser = require('cookie-parser');
 
 
@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const registrar = require('./security/register');
 app.use('/registrar', registrar);
-
+ 
 const loginR = require('./security/login');
 app.use('/loginR', loginR);
 
