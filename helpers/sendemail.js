@@ -1,13 +1,12 @@
-
 const crypto = require('crypto');
-
-const transporter = require('../helpers/email');
 const express = require('express');
 const router = express.Router();
 const prisma = require('../prisma/client');
 const path =require('path');
 const bcrypt = require('bcrypt');
 const smsfunction = require('../helpers/sms')
+
+const resend =require('./email');
 
 router.post('/passwordreset',async(req,res)=>{
     const {emailreset} =req.body;
@@ -31,8 +30,8 @@ router.post('/passwordreset',async(req,res)=>{
         }
 
     })
-await transporter.sendMail({
-    from:process.env.EMAILUSER,
+await resend.emails.send({
+     from: 'onboarding@resend.dev', 
     to:emailreset,
     subject:'smart bursary reset password',
     html:`
