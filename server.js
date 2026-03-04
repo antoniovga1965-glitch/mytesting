@@ -36,7 +36,7 @@ const resetpassword = require('./helpers/sendemail');
 app.use('/resetpassword',resetpassword);
 
 
-app.listen(port,()=>{
-    console.log(`http://localhost:${port}`);
+app.listen(PORT,()=>{
+    console.log(`http://localhost:${PORT}`);
     
 })
