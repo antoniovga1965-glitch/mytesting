@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model registered_user {
+  id                    Int                      @id @default(autoincrement())
+  NAMES                 String
+  EMAIL                 String                   @unique
+  PHONE                 String
+  hashedpassword        String
+  role                  String                   @default("student")
+  applications          Applicants[]
+  university_applicants university_applicants[]  
+  created_at            DateTime                 @default(now())
+  token             String?
+  resetTokenExpiry  DateTime?
+}
+
+model Applicants{
+
+  id Int @id @default(autoincrement())
+  APPLICANTNAME String
+  APPLICANTPHONE String 
+  GENDER String
+  COUNTY String
+  WARD String
+  SCHOOLNAME String
+  YOS String
+  FEEBALANCE Float
+  GUARDIANNAME String
+  GUARDIANPHONE String
+   extractedData Json  
+  INCOME String
+  confidenceScore Int    @default(0) 
+  status String @default("pending")
+  created_at DateTime @default(now())
+  userId          Int
+  user            registered_user @relation(fields: [userId], references: [id])
+
+}
+
+model university_applicants {
+  id              Int             @id @default(autoincrement())
+  NAMES           String
+  UNIPHONENO      String         
+  UNICOUNTY       String
+  UNIWARD         String
+  UNIVERSITYNAME  String
+  REGNO           String          @unique
+  extractedData   Json
+  confidenceScore Int             @default(0)  // ← capital S
+  status          String          @default("pending")
+  userId          Int
+  user            registered_user @relation(fields: [userId], references: [id])
+  created_at      DateTime        @default(now())
+}
+
+
+model budget{
+  id Int @id  @default(autoincrement())
+  SETBUDGET Float 
+  FINANCIALYEAR String
+  BUDGETEDCOUNTY  String
+   created_at      DateTime        @default(now())
+}
+model documentHash {
+  id          Int    @id @default(autoincrement())
+  hash        String @unique
+  fieldname   String
+  applicantId Int
+  createdAt   DateTime @default(now())
+}
+
+
+model universitydocumentHash {
+  id          Int    @id @default(autoincrement())
+  hash        String @unique
+  fieldname   String
+  applicantId Int
+  createdAt   DateTime @default(now())
+}

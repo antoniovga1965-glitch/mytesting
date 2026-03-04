@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Smart Bursary Allocation System</title>
+    
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a5c3a',
+                        'primary-light': '#2d8a5a',
+                        'primary-dark': '#0e3d27',
+                        accent: '#f0a500',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<style>
+    .dark-mode .bg-white {
+    background-color: hsl(102, 12%, 21%) ;
+}
+</style>
+
+<body  class="bg-gray-100 font-sans">
+
+<!-- ===== LANDING / AUTH ===== -->
+<div class="min-h-screen grid grid-cols-1 md:grid-cols-2" id="landingPage">
+
+    <!-- LEFT SIDE -->
+    <div class=" md:flex flex-col justify-between p-12 bg-gradient-to-br from-green-950 via-green-800 to-green-600">
+        <!-- Brand -->
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-yellow-500 rounded-xl flex items-center justify-center text-2xl">🎓</div>
+            <span class="text-white font-bold text-xl">Smart<span class="text-yellow-400">Bursary</span></span>
+        </div>
+
+        <!-- Hero -->
+        <div>
+            <h1 class="text-5xl font-bold text-white leading-tight mb-4">Welcome to Smart Bursary Allocation System</h1>
+            <p class="text-green-200 text-base leading-relaxed max-w-md">A transparent, AI-powered platform ensuring genuine students receive the financial support they deserve. Fair. Fast. Fraud-proof.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="flex gap-8">
+            <div class="border-l-4 border-yellow-400 pl-4">
+                <div class="text-3xl font-black text-white">47</div>
+                <div class="text-xs text-green-300 uppercase tracking-widest">Counties</div>
+            </div>
+            <div class="border-l-4 border-yellow-400 pl-4">
+                <div class="text-3xl font-black text-white">100%</div>
+                <div class="text-xs text-green-300 uppercase tracking-widest">Transparent</div>
+            </div>
+            <div class="border-l-4 border-yellow-400 pl-4">
+                <div class="text-3xl font-black text-white">AI</div>
+                <div class="text-xs text-green-300 uppercase tracking-widest">Verified</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE - AUTH -->
+    <div class="flex items-center justify-center p-8 bg-white">
+        <div class="w-full max-w-md">
+            <p class="text-gray-400 text-sm mb-4">Register or login to continue</p>
+
+            
+
+            <!-- LOGIN FORM -->
+            <div id="loginForm1">
+                <h2 class="text-2xl font-bold mb-1">Welcome back</h2>
+                <p class="text-gray-400 text-sm mb-5">Login to access your dashboard</p>
+                <form id="loginform">
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="username">Full Names</label>
+                        <input type="text" id="usernamelogin" placeholder="Enter your full names" 
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 transition text-sm">
+                        <p class="text-red-500 text-xs mt-1 hidden" id="usernameerror">Enter the correct full names</p>
+                    </div>
+                    <div class="mb-5">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="password">Password</label>
+                        <div class="relative">
+                            <input type="password" id="password" placeholder="Enter your password" 
+                                class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 transition text-sm">
+                            <img id="showpassword" src="visible.png" alt="show" class="absolute right-3 top-1/2 -translate-y-1/2 w-5 opacity-40 cursor-pointer">
+                        </div>
+                        <p class="text-red-500 text-xs mt-1 hidden" id="passworderror">Enter the correct password</p>
+                    </div>
+                    <button id="loginbtn" class="w-full bg-green-800 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition">Login</button>
+                    <p id="results" class="mt-3 text-sm hidden"></p>
+                </form>
+               
+                <p class="text-center text-sm text-gray-400 mt-4">Don't have an account? <a href="#" id="signuplink" class="text-green-700 font-semibold">Sign up here</a></p>
+                <div class="">
+                      <p class="text-center font-bold "> Forgot Password <a class="font-bold font-serif text-blue-500" id="passwordreset" href="#">Click here</a> to reset your password</p>
+                <input type="email" id="forgotemailfield" placeholder="Enter your email address" required
+                            class="mt-2 hidden w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 transition text-sm">
+                    </div>
+              
+          
+            </div>
+
+            <!-- REGISTER FORM -->
+            <div id="registerForm" class="hidden">
+                <h2 class="text-2xl font-bold mb-1">Create account</h2>
+                <p class="text-gray-400 text-sm mb-5">Join the Smart Bursary platform</p>
+                <form id="regform">
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="registrationnames">Full Names</label>
+                        <input type="text" id="registrationnames" placeholder="Enter your full names" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 transition text-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="registrationemail">Email</label>
+                        <input type="email" id="registrationemail" placeholder="Enter your email" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 transition text-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="registrationphonenumber">Phone Number</label>
+                        <input type="number" id="registrationphonenumber" placeholder="e.g. 0712345678" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 transition text-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="registrationpassword">Password</label>
+                        <input type="password" id="registrationpassword" placeholder="Create a strong password" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 transition text-sm">
+                    </div>
+                    <div class="mb-5">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="confirmpassword">Confirm Password</label>
+                        <input type="password" id="confirmpassword" placeholder="Re-enter your password" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 transition text-sm">
+                    </div>
+                    <button id="submitbtn" class="w-full bg-green-800 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition">Create Account</button>
+                    <p id="registrationresults" class="mt-3 text-sm hidden"></p>
+                </form>
+                <p class="text-center text-sm text-gray-400 mt-4">Already have an account? <a id="tologin" href="#"  class="text-green-700 font-semibold">Login here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div class="hidden" id="mainApp">
+
+    <!-- NAVBAR -->
+    <nav class="bg-green-950 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 text-white font-bold text-lg">
+                🎓 <span class="text-yellow-400">Smart</span>Bursary
+            </div>
+            <div class="flex items-center gap-4">
+                <img id="darkmode" src="brightness-and-contrast.png" alt="Dark mode" class="w-5 opacity-60 cursor-pointer hover:opacity-100 transition">
+                <div class="flex flex-col gap-1 cursor-pointer" id="hamburgermenu">
+                    <span class="block w-6 h-0.5 bg-white rounded"></span>
+                    <span class="block w-6 h-0.5 bg-white rounded"></span>
+                    <span class="block w-6 h-0.5 bg-white rounded"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+   <aside id="aside" 
+    class="fixed top-0 left-[-100%] bg-gray-800 w-[70%] md:w-[30%] h-screen z-50 transition-all duration-300 p-6">
+    
+    <button id="homebutton" class="text-white bg-violet-400 rounded-2xl px-4 py-2 w-full mb-3">Home</button>
+    <button id="dashboard" class="text-white bg-violet-400 rounded-2xl px-4 py-2 w-full mb-3">Dashboard</button>
+    <button id="apply" class="text-white bg-violet-400 rounded-2xl px-4 py-2 w-full mb-3">Apply</button>
+    <button id="logout" class="text-white bg-violet-400 rounded-2xl px-4 py-2 w-full mb-3">Logout</button>
+</aside>
+    
+    <!-- STUDENT DASHBOARD -->
+    <section id="studentDashboard">
+        <div class="max-w-5xl mx-auto px-6 py-8">
+
+            <!-- Hero -->
+            <div class="bg-gradient-to-r from-green-800 to-green-600 rounded-2xl p-8 text-white mb-8 relative overflow-hidden">
+                <div class="absolute right-8 top-1/2 -translate-y-1/2 text-8xl opacity-10">🎓</div>
+                <h1 class="text-3xl font-bold mb-2">Welcome to Smart Bursary Distribution Portal</h1>
+                <p class="text-green-100 text-sm">Apply for financial support — transparent, fair, and powered by AI verification.</p>
+            </div>
+
+            <!-- Info Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <h2 class="font-bold text-green-800 mb-4">👥 Who is Eligible?</h2>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-gray-500">
+                        <li>Students with no parents (orphans)</li>
+                        <li>Students with single parents</li>
+                        <li>Students who are disabled</li>
+                        <li>Students whose parents live beyond the poverty line</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <h2 class="font-bold text-green-800 mb-4">📋 How to Apply</h2>
+                    <ol class="list-decimal list-inside space-y-2 text-sm text-gray-500">
+                        <li>Fill in the registration form with correct credentials</li>
+                        <li>Upload necessary documents in each section</li>
+                        <li>After completing, click the Submit button</li>
+                        <li>Wait for processing and verification</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Required Materials -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
+                <h2 class="font-bold text-green-800 mb-3">📁 Required Materials</h2>
+                <p class="text-xs text-gray-400 mb-3">Ensure you have the following before applying:</p>
+                <ol class="list-decimal list-inside space-y-1 text-sm text-gray-500">
+                    <li>KCPE results slip</li>
+                    <li>Recent results slip</li>
+                    <li>Any local authority document (Chief's letter)</li>
+                    <li>ID copy / Birth certificate</li>
+                    <li>Admission letter</li>
+                    <li>Death certificate of any deceased parent</li>
+                </ol>
+            </div>
+
+            <!-- Warning -->
+            <div class="bg-yellow-50 border-2 border-yellow-400 rounded-2xl p-5 mb-8 flex items-start gap-3">
+                <span class="text-2xl">⚠️</span>
+                <p class="text-yellow-800 text-sm font-medium"><strong>Warning:</strong> Any upload of fake documents will lead to permanent elimination from the bursary process and may result in legal action.</p>
+            </div>
+
+            <!-- Apply Buttons -->
+            <h3 class="font-bold text-gray-700 mb-4">Choose Your Application Type</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div id="startapplication"
+                    class="bg-white border-2 border-gray-200 hover:border-green-700 rounded-2xl p-8 text-center cursor-pointer transition hover:shadow-lg hover:-translate-y-1">
+                    <div class="text-5xl mb-3">🏫</div>
+                    <h3 class="font-bold mb-1">Secondary School</h3>
+                    <p class="text-sm text-gray-400">For Form 1–4 students in secondary school</p>
+                </div>
+
+                <div id="universtyapplication"
+                    class="bg-white border-2 border-gray-200 hover:border-green-700 rounded-2xl p-8 text-center cursor-pointer transition hover:shadow-lg hover:-translate-y-1">
+                    <div class="text-5xl mb-3">🎓</div>
+                    <h3 class="font-bold mb-1">University / College</h3>
+                    <p class="text-sm text-gray-400">For comrades in university or college</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECONDARY FORM -->
+    <div class="hidden max-w-3xl mx-auto px-6 py-8" id="secondaryForm">
+        <div class="bg-gradient-to-r from-green-800 to-green-600 rounded-2xl p-6 text-white mb-6">
+            <h1 class="text-2xl font-bold mb-1">🏫 Secondary School Application</h1>
+            <p class="text-green-100 text-sm">Any trial to forge documents will lead to cancellation. Fill with correct details.</p>
+        </div>
+
+        <form id="seconday">
+            <!-- Personal Details -->
+            <fieldset class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-5">
+                <legend class="font-bold text-green-800 px-2">👤 Personal Details</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="applicantsnames">Full Names</label>
+                        <input type="text" id="applicantsnames" placeholder="Enter your full names" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="applicantsohoneno">Phone Number</label>
+                        <input type="number" id="applicantsohoneno" placeholder="Phone number" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="genderselect">Gender</label>
+                        <select id="genderselect" class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 text-sm">
+                            <option value="">Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Rathernotsay">Rather not say</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="countyselect">County</label>
+                        <select id="countyselect" class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 text-sm">
+                            <option value="">Select county</option>
+                            <option value="migori">Migori</option>
+                            <option value="kisii">Kisii</option>
+                            <option value="Nairobi">Nairobi</option>
+                            <option value="kisumu">Kisumu</option>
+                            <option value="Siaya">Siaya</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="wardinout">Ward</label>
+                        <select id="wardinout" class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 text-sm">
+                            <option value="">Select ward</option>
+                            <option value="nyabasi west">Nyabasi West</option>
+                            <option value="Bukira east">Bukira East</option>
+                            <option value="nyabasi east">Nyabasi East</option>
+                            <option value="Bukira west">Bukira West</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Institution Details -->
+            <fieldset class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-5">
+                <legend class="font-bold text-green-800 px-2">🏫 Institution Details</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="applicantsschoolname">School Name</label>
+                        <input type="text" id="applicantsschoolname" placeholder="Enter your school name" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="applicantsadmissionno">Admission Number</label>
+                        <input type="text" id="applicantsadmissionno" placeholder="Admission number" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="applicantsYOS">Year of Study</label>
+                        <input type="date" id="applicantsYOS" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="applicantsfeebalance">Fee Balance (KES)</label>
+                        <input type="number" id="applicantsfeebalance" placeholder="Enter your fee balance" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Guardian Details -->
+            <fieldset class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-5">
+                <legend class="font-bold text-green-800 px-2">👨‍👩‍👧 Guardian Details</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="Guardianname">Guardian / Parent Name</label>
+                        <input type="text" id="Guardianname" placeholder="Guardian/Parent full names" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="GuardianPhoneno">Guardian Phone</label>
+                        <input type="number" id="GuardianPhoneno" placeholder="Guardian phone number" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="income">Income Range</label>
+                        <select id="income" class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 text-sm">
+                            <option value="">Select income range</option>
+                            <option value="Below 10000">Below KES 10,000</option>
+                            <option value="10000-30000">KES 10,000 – 30,000</option>
+                            <option value="40000-80000">KES 40,000 – 80,000</option>
+                            <option value="over 100000">Over KES 100,000</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="GuardianId">Guardian / Parent ID</label>
+                        <input type="file" id="GuardianId" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-sm cursor-pointer">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Document Uploads -->
+            <fieldset class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-5">
+                <legend class="font-bold text-green-800 px-2">📁 Document Uploads</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="resultsuplaods">Results Slip</label>
+                        <div class="border-2 border-dashed border-gray-200 hover:border-green-600 rounded-xl p-4 text-center transition cursor-pointer bg-gray-50">
+                            <input type="file" id="resultsuplaods" class="w-full text-sm bg-transparent border-none outline-none">
+                            <p class="text-xs text-gray-400 mt-1">📄 PDF or Image</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="admisionletter">Admission Letter</label>
+                        <div class="border-2 border-dashed border-gray-200 hover:border-green-600 rounded-xl p-4 text-center transition cursor-pointer bg-gray-50">
+                            <input type="file" id="admisionletter" class="w-full text-sm bg-transparent border-none outline-none">
+                            <p class="text-xs text-gray-400 mt-1">📄 PDF or Image</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="birthcertuplaods">Birth Certificate</label>
+                        <div class="border-2 border-dashed border-gray-200 hover:border-green-600 rounded-xl p-4 text-center transition cursor-pointer bg-gray-50">
+                            <input type="file" id="birthcertuplaods" class="w-full text-sm bg-transparent border-none outline-none">
+                            <p class="text-xs text-gray-400 mt-1">📄 PDF or Image</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="Deathcertuplaods">Death Certificate</label>
+                        <div class="border-2 border-dashed border-gray-200 hover:border-green-600 rounded-xl p-4 text-center transition cursor-pointer bg-gray-50">
+                            <input type="file" id="Deathcertuplaods" class="w-full text-sm bg-transparent border-none outline-none">
+                            <p class="text-xs text-gray-400 mt-1">📄 Only if parent deceased</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="chiefletteruplaods">Chief Letter</label>
+                        <div class="border-2 border-dashed border-gray-200 hover:border-green-600 rounded-xl p-4 text-center transition cursor-pointer bg-gray-50">
+                            <input type="file" id="chiefletteruplaods" class="w-full text-sm bg-transparent border-none outline-none">
+                            <p class="text-xs text-gray-400 mt-1">📄 PDF or Image</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="feestatement">Fee Statement</label>
+                        <div class="border-2 border-dashed border-gray-200 hover:border-green-600 rounded-xl p-4 text-center transition cursor-pointer bg-gray-50">
+                            <input type="file" id="feestatement" class="w-full text-sm bg-transparent border-none outline-none">
+                            <p class="text-xs text-gray-400 mt-1">📄 PDF or Image</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Declaration -->
+            <div class="bg-green-50 border-2 border-green-200 rounded-2xl p-5 flex items-start gap-3 mb-5">
+                <input type="radio" name="declaration" class="mt-1 accent-green-700">
+                <p class="text-sm text-gray-700"><strong>I hereby declare that the data I have presented is true and factual.</strong> I understand that any false information will lead to permanent disqualification.</p>
+            </div>
+
+            
+        <button id="submitapplication" class="w-full bg-green-800 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition">Submit Application</button>
+        <p class="bg-gray-800 px-2 rounded-xl mt-4 py-2 text-white hidden" id="secondaryresults"></p>
+        </form>
+    </div>
+
+    <!-- UNIVERSITY FORM -->
+    <div class="hidden max-w-3xl mx-auto px-6 py-8" id="universityForm">
+        <div class="bg-gradient-to-r from-green-800 to-green-600 rounded-2xl p-6 text-white mb-6">
+            <h1 class="text-2xl font-bold mb-1">🎓 University / College Application</h1>
+            <p class="text-green-100 text-sm">Hi comrade, welcome to the application window. Fill in all details accurately.</p>
+        </div>
+
+        <form id="univform">
+            <fieldset class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-5">
+                <legend class="font-bold text-green-800 px-2">👤 Personal Details</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="uninames">Full Names</label>
+                        <input type="text" id="unistudentsname" placeholder="Enter your full names" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="uniphoneno">Phone Number</label>
+                        <input type="number" id="uniphoneno" placeholder="Phone number" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="unicounty">County</label>
+                        <input type="text" id="unicounty" placeholder="Enter your county" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="uniward">Ward</label>
+                        <input type="text" id="uniward" placeholder="Enter your ward" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-5">
+                <legend class="font-bold text-green-800 px-2">🏛️ Institution Details</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="fullnames">Institution name</label>
+                        <input type="text" id="universityname" placeholder="Names of your Institution" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="regno">Registration Number</label>
+                        <input type="text" id="regno" placeholder="Registration number" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-5">
+                <legend class="font-bold text-green-800 px-2">📁 Documents</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="idcopy">ID Copy</label>
+                        <div class="border-2 border-dashed border-gray-200 hover:border-green-600 rounded-xl p-4 bg-gray-50 transition">
+                            <input type="file" id="idcopy" class="w-full text-sm">
+                            <p class="text-xs text-gray-400 mt-1">📄 PDF or Image</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="resultscopy">Results Slip</label>
+                        <div class="border-2 border-dashed border-gray-200 hover:border-green-600 rounded-xl p-4 bg-gray-50 transition">
+                            <input type="file" id="resultscopy" class="w-full text-sm">
+                            <p class="text-xs text-gray-400 mt-1">📄 PDF or Image</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="admisionletter">Admission Letter</label>
+                        <div class="border-2 border-dashed border-gray-200 hover:border-green-600 rounded-xl p-4 bg-gray-50 transition">
+                            <input type="file" id="uniadmisionletter" class="w-full text-sm">
+                            <p class="text-xs text-gray-400 mt-1">📄 PDF or Image</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="Birthcerticate">Birth Certificate</label>
+                        <div class="border-2 border-dashed border-gray-200 hover:border-green-600 rounded-xl p-4 bg-gray-50 transition">
+                            <input type="file" id="Birthcerticate" class="w-full text-sm">
+                            <p class="text-xs text-gray-400 mt-1">📄 PDF or Image</p>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="Deathcerticate">Death Certificate (If Applicable)</label>
+                        <div class="border-2 border-dashed border-gray-200 hover:border-green-600 rounded-xl p-4 bg-gray-50 transition">
+                            <input type="file" id="Deathcerticate" class="w-full text-sm">
+                            <p class="text-xs text-gray-400 mt-1">📄 Upload if parent is deceased</p>
+                        
+                        </div>
+                        
+                    </div>
+
+                     <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="Deathcerticate">Fee statement</label>
+                        <div class="border-2 border-dashed border-gray-200 hover:border-green-600 rounded-xl p-4 bg-gray-50 transition">
+                            <input type="file" id="universityfeestatement" class="w-full text-sm">
+                    
+                        
+                        </div>
+                        
+                    </div>
+                </div>
+            </fieldset>
+
+            <button id="submitbtnuni" class="w-full bg-green-800 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition">Submit Application</button>
+            <p id="uniresults" class="mt-3 text-sm bg-gray-800 text-white"></p>
+          
+        </form>
+    </div>
+
+     <!-- ADMIN DASHBOARD -->
+    <section class="" id="adminDashboard">
+        <div class="bg-green-950 px-8 py-4 flex items-center justify-between">
+            <h1 class="text-white font-bold text-lg">⚙️ Admin Dashboard — Smart Bursary</h1>
+            <button id="logoutfromadmin" class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-4 py-2 rounded-xl text-sm transition">Logout</button>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-6 py-8">
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white rounded-2xl p-5 shadow-sm border-l-4 border-green-700">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Total Applicants</p>
+                    <p class="text-md font-black text-gray-800" id="applicants">0</p>
+                    <p class="text-md font-black text-gray-800" id="applicantsuni">0</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-sm border-l-4 border-yellow-500">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Pending Review</p>
+                    <p class="text-md font-black text-gray-800" id="pending">0</p>
+                    <p class="text-md font-black text-gray-800" id="pendinguni">0</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-sm border-l-4 border-red-500">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Rejected</p>
+                    <p class="text-3xl font-black text-gray-800" id="rejected">0</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-sm border-l-4 border-green-500">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Remaining Balance</p>
+                    <p class="text-2xl font-black text-gray-800" id="balance">KES 0</p>
+                </div>
+            </div>
+
+            <!-- Budget -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm mb-6">
+                <h2 class="font-bold text-green-800 mb-4">💰 Budget Management</h2>
+                <div class="flex flex-wrap gap-3 items-center">
+                    <label class="text-sm font-semibold text-gray-600" for="budget">Set Budget (KES):</label>
+                    <input type="number" id="budget" placeholder="Enter budget amount"
+                        class="px-4 py-2 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 text-sm w-48">
+
+                        <label class="text-sm font-semibold text-gray-600" for="county">County</label>
+                         <input type="text" id="budgetedcounty" placeholder="Enter budget amount"
+                        class="px-4 py-2 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 text-sm w-48">
+
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1" for="applicantsYOS">Financial Year</label>
+                        <input type="date" id="financialyear" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-100 text-sm">
+
+                    <button id="setbudget" class="bg-green-800 hover:bg-green-700 text-white font-bold px-6 py-2 rounded-xl text-sm transition">Set Budget</button>
+                </div>
+                <p id="BUDGET" class="mt-3 text-sm text-black"></p>
+            </div>
+
+            <!-- Secondary Table -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm mb-6 overflow-x-auto">
+                <h3 class="font-bold text-gray-700 mb-4">🏫 Secondary School Applicants</h3>
+                <div class="flex gap-3 mb-4">
+                    <div class="relative flex-1">
+                        <img id="searchbtn"  src="search-interface-symbol.png" alt="search" class="absolute right-3 top-1/2 -translate-y-1/2 w-4 opacity-40">
+                        <input type="text" id="search" placeholder="Search by name..."
+                            class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:border-green-700">
+                    </div>
+                    <select id="sort" class="px-4 py-2 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:border-green-700">
+                        <option value="0">Filter by status</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Student Name</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Admission No.</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Institution</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Status</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Date</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Action</th>
+                             <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">confidence score</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsdetails"></tbody>
+                </table>
+            </div>
+
+            <!-- University Table -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm mb-6 overflow-x-auto">
+                <h3 class="font-bold text-gray-700 mb-4">🎓 University / College Applicants</h3>
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Student Name</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Reg. No.</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Institution</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Status</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Date</th>
+                            
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Confidence</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody id="universitytable"></tbody>
+                </table>
+            </div>
+
+            <!-- Registered Users -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm mb-6 overflow-x-auto">
+                <h3 class="font-bold text-gray-700 mb-4">👥 Registered Users</h3>
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Full Names</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Email</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">phone number</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">role</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">created_at</th>
+                        </tr>
+                    </thead>
+                    <tbody id="registereddetails"></tbody>
+                </table>
+            </div>
+
+            <!-- Uploaded Docs -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm mb-6">
+                <h3 class="font-bold text-gray-700 mb-4">📁 Uploaded Documents</h3>
+                <ul id="uploadeddocuments" class="space-y-2">
+                    <li class="bg-gray-50 px-4 py-3 rounded-xl text-sm text-gray-400">📄 No documents uploaded yet</li>
+                </ul>
+            </div>
+
+            <!-- Budget Allocation -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm mb-6 overflow-x-auto">
+                <h3 class="font-bold text-gray-700 mb-4">💸 Budget Allocation & Disbursement</h3>
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Student Name</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Institution</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Admission No.</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Ward</th>
+                            <th class="text-left px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-wide border-b border-gray-100">Amount (KES)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="howmoneywasdisbursed"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-green-950 text-green-300 py-8 text-center">
+        <p class="text-sm mb-3">A copyright of Smartkids Production &copy; 2024</p>
+        <ul class="flex gap-6 justify-center flex-wrap text-sm">
+            <li>📧 Smartbursary@gmail.com</li>
+            <li>📞 0727669032</li>
+        </ul>
+    </footer>
+
+</div>
+
+<script src="script.js"></script>
+
+</script>
+</body>
+</html>

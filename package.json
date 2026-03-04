@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "@prisma/client": "^6.19.2",
+    "africastalking": "^0.7.9",
+    "axios": "^1.13.6",
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "crypto": "^1.0.1",
+    "deepseek": "^0.0.2",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "fs": "^0.0.1-security",
+    "groq-sdk": "^0.37.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.1.0",
+    "nodemailer": "^8.0.1",
+    "openai": "^6.25.0",
+    "path": "^0.12.7",
+    "prisma": "^6.19.2",
+    "tessaract": "^1.0.0",
+    "tesseract.js": "^7.0.0",
+    "winston": "^3.19.0",
+    "zod": "^4.3.6"
+  }
+}
